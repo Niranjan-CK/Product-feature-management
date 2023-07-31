@@ -38,7 +38,7 @@ class Activation {
 	public static function deactivate() {
 
 		$page = get_page_by_path( 'feature' );
-		wp_delete_post($page->ID);
+		wp_delete_post( $page->ID );
 		flush_rewrite_rules();
 	}
 

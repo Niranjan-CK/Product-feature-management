@@ -91,11 +91,10 @@ class Feature {
 	 */
 	public static function get_time( $datetime ) {
 		// Get the site's timezone from WordPress settings.
-		$timezone = get_option( 'timezone_string' );
-		$dateTime = new DateTime($datetime);
+		$timezone  = get_option( 'timezone_string' );
+		$date_time = new DateTime( $datetime );
 
-		// Format the date as "d-M-Y" (27-Jul-2023)
-		$date = $dateTime->format('d M Y');
+		$date = $date_time->format( 'd M Y' );
 		// echo $datetime;
 		// Create a DateTime object with the provided datetime and set the timezone.
 		$datetime_obj = new DateTime( $datetime, new DateTimeZone( $timezone ) );
@@ -112,8 +111,8 @@ class Feature {
 		} elseif ( $interval->m > 0 ) {
 			return $date;
 		} elseif ( $interval->d > 0 ) {
-			
-			return $date ;
+
+			return $date;
 		} elseif ( $interval->h > 0 ) {
 			return $human_time_diff . ' ago';
 		} elseif ( $interval->i > 0 ) {

@@ -77,6 +77,4 @@ add_action( 'wp_ajax_delete_image', array( 'ajax', 'delete_image_ajax_handler' )
  * Forms
  */
 add_action( 'init', array( 'Form', 'add_new_idea_form' ) );
-// add_action( 'init', array( 'Form', 'add_references' ) );
 add_action( 'init', array( 'Form', 'edit_idea_form' ) );
-

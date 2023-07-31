@@ -24,10 +24,6 @@ class Form {
 			$project_tag      = $_POST['tags'];
 			$user_id          = get_current_user_id();
 
-			
-
-			
-
 				$data = array(
 					'project_id'       => $project_name,
 					'title'            => $title,
@@ -94,13 +90,11 @@ class Form {
 							}
 						}
 					}
-			
-			
 
-				// Image upload end.
+					// Image upload end.
 
 		}
-		wp_redirect(home_url().'/feature');
+		wp_safe_redirect( home_url() . '/feature' );
 		exit;
 	}
 
@@ -141,38 +135,33 @@ class Form {
 	 * Add references
 	 */
 	public static function vote_by_rerference_ajax_handler() {
-		// if (  isset( $_POST['add_reference_nonce'] ) ||  wp_verify_nonce( $_POST['add_reference_nonce'], 'add_reference' ) ) {
-		// 	return;
-		// }
+
 		check_ajax_referer( 'products-jquery', 'nonce' ); // Verify the nonce.
-		
 
 			$feature    = $_POST['feature_id'];
 			$parts      = explode( '_', $feature );
 			$feature_id = $parts[1];
 			$user_id    = $_POST['vote_reference'];
-			
 
-			if ( '' !== $user_id ) {
-				global $wpdb;
-				$table_name = $wpdb->prefix . 'vote';
-				$data       = array(
-					'feature_id' => $feature_id,
-					'user_id'    => $user_id,
-				);
-				if ( Database::already_liked_response( $feature_id, $user_id ) ) {
-					$wpdb->insert( $table_name, $data, array( '%d', '%s' ) );
-					$vote_count = Database::get_all_votes( $feature_id );
-					echo $vote_count;
-				} else {
-					echo "<script>alert('Already Voted')</script>";
-				}
+		if ( '' !== $user_id ) {
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'vote';
+			$data       = array(
+				'feature_id' => $feature_id,
+				'user_id'    => $user_id,
+			);
+			if ( Database::already_liked_response( $feature_id, $user_id ) ) {
+				$wpdb->insert( $table_name, $data, array( '%d', '%s' ) );
+				$vote_count = Database::get_all_votes( $feature_id );
+				echo esc_html( $vote_count );
 			} else {
-				echo "<script>alert('enter user id')</script>";
+				echo "<script>alert('Already Voted')</script>";
 			}
+		} else {
+			echo "<script>alert('enter user id')</script>";
+		}
 
 			exit();
-		
 	}
 
 	/**
