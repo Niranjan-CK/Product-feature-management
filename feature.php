@@ -70,3 +70,13 @@ add_action( 'wp_ajax_feature_unvote', array( 'ajax', 'feature_unvote_ajax_handle
 add_action( 'wp_ajax_vote_by_rerference', array( 'Form', 'vote_by_rerference_ajax_handler' ) );
 
 add_action( 'wp_ajax_delete_image', array( 'ajax', 'delete_image_ajax_handler' ) );
+
+
+
+/**
+ * Forms
+ */
+add_action( 'init', array( 'Form', 'add_new_idea_form' ) );
+// add_action( 'init', array( 'Form', 'add_references' ) );
+add_action( 'init', array( 'Form', 'edit_idea_form' ) );
+
