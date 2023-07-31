@@ -1,0 +1,26 @@
+{
+  "name": "feature",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js",
+    "clean": "rm -rf dist",
+    "prod": "cross-env NODE_ENV=production webpack --mode production --progress && npm run clean",
+    "lint:php": "vendor/bin/phpcs",
+    "lint:php:fix": "vendor/bin/phpcbf"
+  },
+  "keywords": [
+    "wordpress"
+  ],
+  "author": "Niranjan C K",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.44.0"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.10.5",
+    "cross-env": "^7.0.3"
+  }
+}

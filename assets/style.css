@@ -1,0 +1,279 @@
+.ideas_portal{
+    color: #000;
+    /* text-align: center; */
+    /* font-family: SF Pro Text; */
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+}
+.filter_head{
+    color: #000;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.back-to-home{
+    color: #000;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.add_new_idea_text{
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px; /* 200% */
+}
+.new_idea_form{
+    margin-top: 10px;
+}
+.upload_btn{
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    border: 1px solid var(--gutenberg-gray-400, #CCC);
+    background: var(--gutenberg-white, #FFF);
+    flex: 1 0 0;
+    align-self: stretch;
+
+}
+.avatar-container{
+    overflow: hidden;
+}
+.avatar-container img{
+    border-radius: 50%;
+}
+.filter-section{
+  /* position: fixed; */
+  width: 350px;
+  overflow:scroll;
+  margin-bottom: 100px;
+  /* padding-bottom: 100px; */
+
+
+
+}
+.uploader_details{
+
+  display: flex;
+  gap: 10px;
+ 
+}
+
+.feature-container{
+  margin-bottom: 100px;
+  padding-bottom: 100px;
+}
+.filter-submit-btn{
+  width: 100%;
+}
+.main-conatiner{
+  display: grid;
+  grid-template-columns: 350px 1fr; 
+  overflow: hidden;
+  position: fixed;
+}
+.content-section{
+ overflow-y: auto;
+ width: 100%;
+ margin-bottom: 80px;
+
+ 
+}
+
+.vote-count{
+    text-align: center;
+}
+.rotate{
+    display: inline-block;
+    transform: rotate(90deg);
+}
+.btn-grp{
+    display: flex;
+    cursor:default;
+    border-radius: 45px;
+    padding: 5px;
+    justify-content: center;
+    width: 80px;
+    margin-left: 20px;
+  }
+.vote-btn{
+    border: 0px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 12px;
+    
+}
+.btn-vote{
+  color: #000;
+}
+.vote-btn-div{
+    border: 1px solid gray;
+
+}
+.unvote-btn{
+  color: #FFF;
+}
+.vote-on-behalf{
+    border: 1px solid gray;
+    border-radius: 45px;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 110px;
+    
+}
+.arrow{
+    padding: 0px;
+    rotate: 90;
+}
+.vote-grp{
+    padding: 5px;
+   
+}
+
+/* popup box */
+
+/* Style for the popup container */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  .reference-head{
+    color: var(--gutenberg-gray-900, #1E1E1E);
+    /* Label Semibold */
+    font-family: "SF Pro Text", Arial, sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; /* 123.077% */
+  }
+  .popup-btn{
+    width:150px;
+    margin-top: 10px;
+  }
+  .popup-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Style for the content inside the popup */
+  .popup-content {
+    background-color: #F3F7FB;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 400px;
+    margin: 100px auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  /* Optional: Style for the button that opens the popup */
+  #openPopupButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Feature List */
+
+  .feature-head{
+    cursor:pointer;
+    display: inline-block;
+  }
+
+  .feature-head:hover{
+    color: rgb(55, 0, 255);
+  }
+
+  /* project box */
+  .project-box{
+    font-size: 12px;
+  }
+  .text-box{
+     background-color: white;
+     border: 0.5px solid black;
+     padding: 5px;
+  }
+  .feature_text{
+    color: var(--gutenberg-gray-900, #1E1E1E);
+    font-family: "SF Pro Text", Arial, sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 123.077% */
+  }
+
+  /* Date filter */
+.date-form{
+  display: none;
+}
+
+
+.flex-container {
+  display: flex;
+  justify-content: flex-end; /* Align content to the right end of the container */
+}
+
+
+
+
+::-webkit-scrollbar {
+  width: 0.1em;  /* Set a small width to the scrollbar (optional) */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Set the scrollbar track background to transparent */
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent; /* Set the scrollbar thumb color to transparent */
+}
+
+.delete-btn{
+  
+  margin-top: -30px;
+  padding:0px;
+}
+
+.date-filter {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Set two columns with equal width */
+  gap:10px
+}
+.date-filter  label{
+  margin-top: 10px;
+ }
+ .date-filter input{
+  width: 120px;
+  /* margin-left: 20px; */
+  /* margin-right: 20px; */
+ }
+
+ /* vote in edit */
+ .vote-in-edit{
+  position: absolute;
+  top:180px;
+  right: 330px;
+ }
+
+ .edit-sec-vote-grp{
+  display: flex;
+  gap: 20px;
+ }
