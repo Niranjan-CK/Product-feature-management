@@ -258,7 +258,7 @@ class Ajax {
 
 									$update_time = new DateTime( $details[0]->update_time );
 
-									$updated_formatted_date = $date->format( 'd M Y' );
+									$updated_formatted_date = $update_time->format( 'd M Y' );
 
 								?>
 								<p class="feature_text">Reported by <?php echo esc_html( $username ); ?> </p>
