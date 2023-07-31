@@ -50,6 +50,7 @@ jQuery(document).ready(function($) {
                document.getElementById("popupBox").style.display="none";
                document.getElementById("like"+numericPart).textContent=response;
                document.getElementById(feature_id).style.display = "none";
+               document.getElementById('vote_reference_by_user').value="";
 
                
 
