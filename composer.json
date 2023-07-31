@@ -1,0 +1,32 @@
+{
+    "name": "niranjan/feature",
+    "description": "plugin for add features of products",
+    "autoload": {
+        "psr-4": {
+            "Niranjan\\Feature\\": "src/"
+        }
+    },
+    "keywords": [
+		"wordpress",
+		"plugin"
+	],
+    "authors": [
+        {
+            "name": "Niranjan ck",
+            "email": "niranjankkv1999@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+		"wp-coding-standards/wpcs": "dev-develop",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+	},
+	"config": {
+		"allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+	}
+}
