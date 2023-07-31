@@ -188,9 +188,11 @@ class Feature {
 								</svg>
 							</span>
 						</div>
-						<p class="reference-head">Reference</p>
-							<input type="text" id ="vote_reference_by_user"name="reference_name" class="form-control" placeholder="Text">
-							<button  id="popup_btn" class="popup-btn btn btn-dark">Submit</button>
+						<p class="reference-head ">Reference</p>
+							<div class=" popup-form ">
+								<input type="text" id ="vote_reference_by_user"name="reference_name" class="form-control" placeholder="Text">
+								<button  id="popup_btn" class="popup-btn btn btn-dark">Submit</button>
+							</div>
 
 					</div>
 				</div>
