@@ -153,7 +153,7 @@ class Feature {
 			<?php if ( Database::already_liked_user( $feature_id ) ) : ?>
 				<div class="btn-grp vote-btn-div" id="<?php echo esc_attr( 'bg' . $feature_id ); ?>" style="background-color:white; color:black;" >
 					<button type="button" class="vote-btn btn-vote"  id = "<?php echo esc_attr( $feature_id ); ?>" onclick="vote(event,<?php echo esc_attr( $feature_id ); ?>)">
-						Vote
+						<?php esc_html_e( 'Vote', 'aquila-features' ); ?> 
 					</button>
 					<button type="button" class="vote-btn btn-vote arrow" id = "<?php echo esc_attr( $feature_id ); ?>" onclick="vote_on_behalf(event,<?php echo esc_attr( 'vote_' . $feature_id ); ?>)">
 						<svg xmlns="http://www.w3.org/2000/svg" width="13" id="<?php echo esc_attr( 'svg' . $feature_id ); ?>" height="13" fill="black" class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -164,7 +164,7 @@ class Feature {
 			<?php else : ?>
 				<div class="btn-grp btn-primary" id="<?php echo esc_attr( 'bg' . $feature_id ); ?>"  >
 					<button type="button" class="vote-btn unvote-btn"  id = "<?php echo esc_attr( $feature_id ); ?>" onclick="unvote(event,<?php echo esc_attr( $feature_id ); ?>)">
-						VOTED
+						<?php esc_html_e( 'VOTED', 'aquila-features' ); ?> 
 					</button>
 					<button type="button" class="vote-btn unvote-btn arrow" id = "<?php echo esc_attr( $feature_id ); ?>" onclick="vote_on_behalf(event,<?php echo esc_attr( 'vote_' . $feature_id ); ?>)">
 					<svg xmlns="http://www.w3.org/2000/svg" id="<?php echo esc_attr( 'svg' . $feature_id ); ?>" width="13" height="13" fill="#fff" class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -188,10 +188,10 @@ class Feature {
 								</svg>
 							</span>
 						</div>
-						<p class="reference-head ">Reference</p>
+						<p class="reference-head "> <?php esc_html_e( 'Reference', 'aquila-features' ); ?> </p>
 							<div class=" popup-form ">
 								<input type="text" id ="vote_reference_by_user"name="reference_name" class="form-control" placeholder="Text">
-								<button  id="popup_btn" class="popup-btn btn btn-dark">Submit</button>
+								<button  id="popup_btn" class="popup-btn btn btn-dark"> <?php esc_html_e( 'Submit', 'aquila-features' ); ?> </button>
 							</div>
 
 					</div>
@@ -210,7 +210,7 @@ class Feature {
 	public static function feature_vote_in_edit_section( $feature_id ) {
 		$count = Database::get_all_votes( $feature_id );
 		?>
-		<span id="<?php echo esc_attr( 'like' . $feature_id ); ?>"> <?php echo esc_html( $count ); ?></span> Votes
+		<span id="<?php echo esc_attr( 'like' . $feature_id ); ?>"> <?php echo esc_html( $count ); ?></span> <?php esc_html_e( 'Votes', 'aquila-features' ); ?> 
 		<?php
 	}
 

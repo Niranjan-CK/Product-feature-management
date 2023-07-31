@@ -16,13 +16,19 @@ class Form {
 			return;
 		}
 		if ( isset( $_POST['add_new_feature'] ) ) {
-			$project_name     = $_POST['project_name'];
-			$title            = $_POST['title'];
-			$description      = $_POST['description'];
-			$project_status   = $_POST['project_status'];
-			$project_priority = $_POST['project_priority'];
-			$project_tag      = $_POST['tags'];
+			$project_name     = isset( $_POST['project_name'] ) ? sanitize_text_field( $_POST['project_name'] ) : '';
+			$title            = isset( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+			$description      = isset( $_POST['description'] ) ? sanitize_textarea_field( $_POST['description'] ) : '';
+			$project_status   = isset( $_POST['project_status'] ) ? sanitize_text_field( $_POST['project_status'] ) : '';
+			$project_priority = isset( $_POST['project_priority'] ) ? sanitize_text_field( $_POST['project_priority'] ) : '';
+			$project_tag      = isset( $_POST['tags'] ) ? sanitize_text_field( $_POST['tags'] ) : '';
 			$user_id          = get_current_user_id();
+
+			if ( '' === $project_name || '' === $title || '' === $description ||
+			'' === $project_status || '' === $project_priority || '' === $project_tag || '' === $user_id ) {
+				echo '<p>Fill all the field</p>';
+
+			} else {
 
 				$data = array(
 					'project_id'       => $project_name,
@@ -69,6 +75,7 @@ class Form {
 							}
 						}
 					}
+			}
 
 					// Image upload end.
 
@@ -117,10 +124,10 @@ class Form {
 
 		check_ajax_referer( 'products-jquery', 'nonce' ); // Verify the nonce.
 
-			$feature    = $_POST['feature_id'];
+			$feature    = isset( $_POST['feature_id'] ) ? sanitize_text_field( $_POST['feature_id'] ) : '';
 			$parts      = explode( '_', $feature );
 			$feature_id = $parts[1];
-			$user_id    = $_POST['vote_reference'];
+			$user_id    = isset( $_POST['vote_reference'] ) ? sanitize_text_field( $_POST['vote_reference'] ) : '';
 
 		if ( '' !== $user_id ) {
 			global $wpdb;
@@ -153,38 +160,45 @@ class Form {
 
 		if ( isset( $_POST['edit_feature'] ) ) {
 
-			$feature_id       = $_POST['edit_feature'];
-			$title            = $_POST['title_edit'];
-			$description      = $_POST['description_edit'];
-			$project_status   = $_POST['project_status_edit'];
-			$project_priority = $_POST['project_priority_edit'];
-			$project_tag      = $_POST['tags_edit'];
-			$data             = array(
-				'title'            => $title,
-				'description'      => $description,
-				'project_status'   => $project_status,
-				'project_priority' => $project_priority,
-				'project_tag'      => $project_tag,
-				'update_time'      => current_time( 'mysql' ),
-			);
-			Database::delete_image_from_table( $feature_id );
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'feature';
-			$wpdb->update( $table_name, $data, array( 'id' => $feature_id ) );
-			$file_count = isset( $_FILES['file']['name'] ) ? count( $_FILES['file']['name'] ) : -1;
-			for ( $i = 0; $i < $file_count; $i++ ) {
-				$image         = $_FILES['file']['name'][ $i ];
-				$uploaded_file = self::upload_image_to_folder( $_FILES['file'] );
-				if ( $uploaded_file ) {
-					$table_name = $wpdb->prefix . 'upload_feature_image';
-					foreach ( $uploaded_file as $file ) {
-						$wpdb->insert(
-							$table_name,
-							array(
-								'feature_id' => $feature_id,
-								'image'      => $file,
-							)
-						);
+			$feature_id       = isset( $_POST['edit_feature'] ) ? absint( $_POST['edit_feature'] ) : 0;
+			$title            = isset( $_POST['title_edit'] ) ? sanitize_text_field( $_POST['title_edit'] ) : '';
+			$description      = isset( $_POST['description_edit'] ) ? sanitize_textarea_field( $_POST['description_edit'] ) : '';
+			$project_status   = isset( $_POST['project_status_edit'] ) ? sanitize_text_field( $_POST['project_status_edit'] ) : '';
+			$project_priority = isset( $_POST['project_priority_edit'] ) ? sanitize_text_field( $_POST['project_priority_edit'] ) : '';
+			$project_tag      = isset( $_POST['tags_edit'] ) ? sanitize_text_field( $_POST['tags_edit'] ) : '';
+
+			if ( '' === $feature_id || '' === $title || '' === $description ||
+			'' === $project_status || '' === $project_priority || '' === $project_tag ) {
+				echo '<p>Fill all the field</p>';
+
+			} else {
+				$data = array(
+					'title'            => $title,
+					'description'      => $description,
+					'project_status'   => $project_status,
+					'project_priority' => $project_priority,
+					'project_tag'      => $project_tag,
+					'update_time'      => current_time( 'mysql' ),
+				);
+				Database::delete_image_from_table( $feature_id );
+				global $wpdb;
+				$table_name = $wpdb->prefix . 'feature';
+				$wpdb->update( $table_name, $data, array( 'id' => $feature_id ) );
+				$file_count = isset( $_FILES['file']['name'] ) ? count( $_FILES['file']['name'] ) : -1;
+				for ( $i = 0; $i < $file_count; $i++ ) {
+					$image         = $_FILES['file']['name'][ $i ];
+					$uploaded_file = self::upload_image_to_folder( $_FILES['file'] );
+					if ( $uploaded_file ) {
+						$table_name = $wpdb->prefix . 'upload_feature_image';
+						foreach ( $uploaded_file as $file ) {
+							$wpdb->insert(
+								$table_name,
+								array(
+									'feature_id' => $feature_id,
+									'image'      => $file,
+								)
+							);
+						}
 					}
 				}
 			}
@@ -214,12 +228,12 @@ class Form {
 
 		if ( isset( $_GET['filter_feature'] ) ) {
 
-			$project_name = isset( $_GET['project_name'] ) ? $_GET['project_name'] : false;
-			$status       = isset( $_GET['filter_project_status'] ) ? $_GET['filter_project_status'] : false;
-			$priority     = isset( $_GET['filter_project_priority'] ) ? $_GET['filter_project_priority'] : false;
-			$tag          = isset( $_GET['filter_project_tag'] ) ? $_GET['filter_project_tag'] : false;
-			$reporter     = isset( $_GET['filter_project_reporter'] ) ? $_GET['filter_project_reporter'] : false;
-			$date         = isset( $_GET['filter_project_date'] ) ? $_GET['filter_project_date'] : false;
+			$project_name = isset( $_GET['project_name'] ) ? sanitize_text_field( $_GET['project_name'] ) : false;
+			$status       = isset( $_GET['filter_project_status'] ) ? sanitize_text_field( $_GET['filter_project_status'] ) : false;
+			$priority     = isset( $_GET['filter_project_priority'] ) ? sanitize_text_field( $_GET['filter_project_priority'] ) : false;
+			$tag          = isset( $_GET['filter_project_tag'] ) ? sanitize_text_field( $_GET['filter_project_tag'] ) : false;
+			$reporter     = isset( $_GET['filter_project_reporter'] ) ? sanitize_text_field( $_GET['filter_project_reporter'] ) : false;
+			$date         = isset( $_GET['filter_project_date'] ) ? sanitize_text_field( $_GET['filter_project_date'] ) : false;
 			$start_date   = null;
 
 			if ( $date ) {
@@ -328,8 +342,8 @@ class Form {
 				break;
 			case 'custom':
 				if ( isset( $_GET['filter-feature-nonce'] ) || wp_verify_nonce( $_GET['filter-feature-nonce'], 'filter-feature' ) ) {
-					$start_date = $_GET['start_date'];
-					$end_date   = $_GET['end_date'];
+					$start_date = isset( $_GET['start_date'] ) ? $_GET['start_date'] : '';
+					$end_date   = isset( $_GET['end_date'] ) ? $_GET['end_date'] : '';
 				}
 
 				break;

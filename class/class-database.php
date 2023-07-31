@@ -80,7 +80,7 @@ class Database {
 	public static function create_image_table( $table_name ) {
 		$sql = "CREATE TABLE $table_name (
 			id int(11) NOT NULL AUTO_INCREMENT,
-			feature_id varchar(255) NOT NULL,
+			feature_id int(11) NOT NULL,
 			image varchar(255) NOT NULL,
 			PRIMARY KEY  (id)
 			);";

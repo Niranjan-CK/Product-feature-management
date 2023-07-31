@@ -18,7 +18,7 @@ class Shortcodes {
 
 
 			<div class="conatainer" style="position:fixed" >
-				<h1 class="bg-white p-4 ideas_portal" >Ideas portal</h1>
+				<h1 class="bg-white p-3 ideas_portal" > <?php esc_html_e( 'Ideas portal', 'aquila-features' ); ?> </h1>
 				<div class=" main-conatiner" style="width:100%;height:100vh; background-color:#f3f7fb; margin-bottom:40px;" >
 					<div class="col-3 bg-white filter-section p-5" id="left_side">
 						<?php Filter::filter_section(); ?>

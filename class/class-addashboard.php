@@ -32,13 +32,13 @@ class Addashboard {
 	 */
 	public static function feature_page() {
 		?>
-		<h1>Add Products</h1>
+		<h1><?php esc_html_e( 'Add Products', 'aquila-features' ); ?></h1>
 
 		<form method="post">
 			<?php wp_nonce_field( 'add_product', 'add_product_nonce' ); ?>
 			<table>
 				<tr>
-					<td>Product Name</td>
+					<td> <?php esc_html_e( 'Product Name', 'aquila-features' ); ?> </td>
 					<td><input type="text" name="product_name" id="product_name"></td>
 				</tr>
 				<tr>
@@ -58,7 +58,7 @@ class Addashboard {
 			if ( ! isset( $_POST['add_product_nonce'] ) || ! wp_verify_nonce( $_POST['add_product_nonce'], 'add_product' ) ) {
 				wp_die( 'Security check' );
 			}
-			$product_name = sanitize_text_field( $_POST['product_name'] );
+			$product_name = isset( $_POST['product_name'] ) ? sanitize_text_field( $_POST['product_name'] ) : false;
 			$product_slug = sanitize_title( $product_name );
 			global $wpdb;
 			$data            = array(
