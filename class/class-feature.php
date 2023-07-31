@@ -38,7 +38,7 @@ class Feature {
 					</div>
 
 					<div class="col-8">
-						<h4  class="feature-head" id="<?php echo esc_html( $feature->id ); ?>" onclick="edit_feature(event,<?php echo esc_html( $feature->id ); ?>)"><?php echo esc_html( $feature->title ); ?></h4>
+						<h4  class="feature-head" id="<?php echo esc_attr( $feature->id ); ?>" onclick="edit_feature(event,<?php echo esc_attr( $feature->id ); ?>)"><?php echo esc_html( $feature->title ); ?></h4>
 						<p><?php echo esc_html( $feature->description ); ?></p>
 						<!-- uploader details -->
 						<div class=" uploader_details">
@@ -130,7 +130,7 @@ class Feature {
 	public static function feature_vote( $feature_id ) {
 		?>
 		<div class="vote-count ">
-			<span id="<?php echo esc_html( 'like' . $feature_id ); ?>">
+			<span id="<?php echo esc_attr( 'like' . $feature_id ); ?>">
 				<?php
 					$count = Database::get_all_votes( $feature_id );
 					echo esc_html( $count );
@@ -151,29 +151,29 @@ class Feature {
 		?>
 		<div class="vote-grp">
 			<?php if ( Database::already_liked_user( $feature_id ) ) : ?>
-				<div class="btn-grp vote-btn-div" id="<?php echo esc_html( 'bg' . $feature_id ); ?>" style="background-color:white; color:black;" >
-					<button type="button" class="vote-btn btn-vote"  id = "<?php echo esc_html( $feature_id ); ?>" onclick="vote(event,<?php echo esc_html( $feature_id ); ?>)">
+				<div class="btn-grp vote-btn-div" id="<?php echo esc_attr( 'bg' . $feature_id ); ?>" style="background-color:white; color:black;" >
+					<button type="button" class="vote-btn btn-vote"  id = "<?php echo esc_attr( $feature_id ); ?>" onclick="vote(event,<?php echo esc_attr( $feature_id ); ?>)">
 						Vote
 					</button>
-					<button type="button" class="vote-btn btn-vote arrow" id = "<?php echo esc_html( $feature_id ); ?>" onclick="vote_on_behalf(event,<?php echo esc_html( 'vote_' . $feature_id ); ?>)">
-						<svg xmlns="http://www.w3.org/2000/svg" width="13" id="<?php echo esc_html( 'svg' . $feature_id ); ?>" height="13" fill="black" class="bi bi-chevron-down" viewBox="0 0 16 16">
+					<button type="button" class="vote-btn btn-vote arrow" id = "<?php echo esc_attr( $feature_id ); ?>" onclick="vote_on_behalf(event,<?php echo esc_attr( 'vote_' . $feature_id ); ?>)">
+						<svg xmlns="http://www.w3.org/2000/svg" width="13" id="<?php echo esc_attr( 'svg' . $feature_id ); ?>" height="13" fill="black" class="bi bi-chevron-down" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
 						</svg>
 					</button>
 				</div>
 			<?php else : ?>
-				<div class="btn-grp btn-primary" id="<?php echo esc_html( 'bg' . $feature_id ); ?>"  >
-					<button type="button" class="vote-btn unvote-btn"  id = "<?php echo esc_html( $feature_id ); ?>" onclick="unvote(event,<?php echo esc_html( $feature_id ); ?>)">
+				<div class="btn-grp btn-primary" id="<?php echo esc_attr( 'bg' . $feature_id ); ?>"  >
+					<button type="button" class="vote-btn unvote-btn"  id = "<?php echo esc_attr( $feature_id ); ?>" onclick="unvote(event,<?php echo esc_attr( $feature_id ); ?>)">
 						VOTED
 					</button>
-					<button type="button" class="vote-btn unvote-btn arrow" id = "<?php echo esc_html( $feature_id ); ?>" onclick="vote_on_behalf(event,<?php echo esc_html( 'vote_' . $feature_id ); ?>)">
-					<svg xmlns="http://www.w3.org/2000/svg" id="<?php echo esc_html( 'svg' . $feature_id ); ?>" width="13" height="13" fill="#fff" class="bi bi-chevron-down" viewBox="0 0 16 16">
+					<button type="button" class="vote-btn unvote-btn arrow" id = "<?php echo esc_attr( $feature_id ); ?>" onclick="vote_on_behalf(event,<?php echo esc_attr( 'vote_' . $feature_id ); ?>)">
+					<svg xmlns="http://www.w3.org/2000/svg" id="<?php echo esc_attr( 'svg' . $feature_id ); ?>" width="13" height="13" fill="#fff" class="bi bi-chevron-down" viewBox="0 0 16 16">
 						<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
 					</svg>
 					</button>
 				</div>
 			<?php endif ?>
-			<button type="button" class="vote-on-behalf btn text-dark " id="<?php echo esc_html( 'vote_' . $feature_id ); ?>" style="display: none;" 	> Vote on behalf </button>
+			<button type="button" class="vote-on-behalf btn text-dark " id="<?php echo esc_attr( 'vote_' . $feature_id ); ?>" style="display: none;" 	> Vote on behalf </button>
 		   
 			<!-- popup box -->
 			<div class="popup" id="popupBox">
@@ -210,7 +210,7 @@ class Feature {
 	public static function feature_vote_in_edit_section( $feature_id ) {
 		$count = Database::get_all_votes( $feature_id );
 		?>
-		<span id="<?php echo esc_html( 'like' . $feature_id ); ?>"> <?php echo esc_html( $count ); ?></span> Votes
+		<span id="<?php echo esc_attr( 'like' . $feature_id ); ?>"> <?php echo esc_html( $count ); ?></span> Votes
 		<?php
 	}
 
@@ -245,7 +245,7 @@ class Feature {
 				<a href="<?php echo esc_url( $image_path ); ?>" style="text-decoration: none" download>
 					<img src="<?php echo esc_url( $image_path ); ?>" alt="" style="width: 50px; height: 50px;">
 				</a>
-				<span onclick="deletefun(event, <?php echo esc_html( strval( $image_id ) ); ?>, <?php echo esc_html( strval( $feature_id ) ); ?>, <?php echo esc_html( $json_img ); ?>)">
+				<span onclick="deletefun(event, <?php echo esc_attr( strval( $image_id ) ); ?>, <?php echo esc_attr( strval( $feature_id ) ); ?>, <?php echo esc_attr( $json_img ); ?>)">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi delete-btn bi-x-circle" viewBox="0 0 16 16">
 						<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 						<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
