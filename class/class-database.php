@@ -73,6 +73,42 @@ class Database {
 	}
 
 	/**
+	 * Create table for upload image
+	 *
+	 * @param string $table_name table name.
+	 */
+	public static function create_image_table( $table_name ) {
+		$sql = "CREATE TABLE $table_name (
+			id int(11) NOT NULL AUTO_INCREMENT,
+			feature_id varchar(255) NOT NULL,
+			image varchar(255) NOT NULL,
+			PRIMARY KEY  (id)
+			);";
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+			dbDelta( $sql );
+	}
+
+	/**
+	 * Insert image to table.
+	 *
+	 * @param string $table_name image table name.
+	 * @param int    $feature_id feature id.
+	 * @param array  $uploaded_file images list.
+	 */
+	public static function insert_image_to_db( $table_name, $feature_id, $uploaded_file ) {
+		global $wpdb;
+		foreach ( $uploaded_file as $file ) {
+			$wpdb->insert(
+				$table_name,
+				array(
+					'feature_id' => $feature_id,
+					'image'      => $file,
+				)
+			);
+		}
+	}
+
+	/**
 	 * Get all Feature from wp_feature table
 	 */
 	public static function get_all_feature_data() {

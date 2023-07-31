@@ -59,34 +59,13 @@ class Form {
 						if ( $uploaded_file ) {
 							$table_name = $wpdb->prefix . 'upload_feature_image';
 							if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) !== $table_name ) {
-								$sql = "CREATE TABLE $table_name (
-								id int(11) NOT NULL AUTO_INCREMENT,
-								feature_id varchar(255) NOT NULL,
-								image varchar(255) NOT NULL,
-								PRIMARY KEY  (id)
-								);";
-								require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-								dbDelta( $sql );
 
-								foreach ( $uploaded_file as $file ) {
-									$wpdb->insert(
-										$table_name,
-										array(
-											'feature_id' => $id,
-											'image'      => $file,
-										)
-									);
-								}
+								Database::create_image_table( $table_name );
+								Database::insert_image_to_db( $table_name, $id, $uploaded_file );
+
 							} else {
-								foreach ( $uploaded_file as $file ) {
-									$wpdb->insert(
-										$table_name,
-										array(
-											'feature_id' => $id,
-											'image'      => $file,
-										)
-									);
-								}
+
+								Database::insert_image_to_db( $table_name, $id, $uploaded_file );
 							}
 						}
 					}
@@ -217,15 +196,9 @@ class Form {
 			global $wpdb;
 
 			$table_name = $wpdb->prefix . 'upload_feature_image';
-			foreach ( $uploaded_images as $image ) {
-				$wpdb->insert(
-					$table_name,
-					array(
-						'feature_id' => $feature_id,
-						'image'      => $image,
-					)
-				);
-			}
+
+			Database::insert_image_to_db( $table_name, $feature_id, $uploaded_images );
+
 		}
 	}
 
