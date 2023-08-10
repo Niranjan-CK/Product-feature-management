@@ -57,18 +57,16 @@ jQuery(document).ready(function($) {
 
             },
             error: function(xhr, status, error) {
-                // console.log(xhr)
-                var responseText = xhr.responseText;
-        
-                // Remove the leading "3" from the response text
-                var jsonStartIndex = responseText.indexOf('{');
-                if (jsonStartIndex !== -1) {
-                    responseText = responseText.substring(jsonStartIndex);
-                }
-
-                try {
-                    var responseJSON = JSON.parse(responseText);
+                try{
+                    // Remove the leading "3" from the response text
+                    var jsonString = xhr.responseText.substring(1);
+            
+                    // Parse the extracted JSON string
+                    var responseJSON = JSON.parse(jsonString);
+                    
+                    // Extract the error message from the parsed JSON
                     var errorMessage = responseJSON.data.message;
+                
                     alert(errorMessage);
                 } catch (e) {
                     console.error("Error parsing JSON response:", e);
