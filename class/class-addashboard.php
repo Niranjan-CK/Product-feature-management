@@ -79,11 +79,11 @@ class Addashboard {
 				require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 				dbDelta( $sql );
 				$wpdb->insert( $table_name, $data );
-				echo "<script>alert('Product added successfully');</script>";
+				echo "<script>alert( wp.i18n.__( 'Product added successfully' ) );</script>";
 
 			} else {
 				$wpdb->insert( $table_name, $data );
-				echo "<script>alert('Product added successfully');</script>";
+				echo "<script>alert( wp.i18n.__( 'Product added successfully' ) );</script>";
 			}
 		}
 	}

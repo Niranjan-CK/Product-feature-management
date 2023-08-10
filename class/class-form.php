@@ -141,10 +141,16 @@ class Form {
 				$vote_count = Database::get_all_votes( $feature_id );
 				echo esc_html( $vote_count );
 			} else {
-				echo "<script>alert('Already Voted')</script>";
+				$vote_count = Database::get_all_votes( $feature_id );
+				echo esc_html( $vote_count );
+				wp_send_json_error( array( 'message' => 'Already liked this feature.' ) );
+
 			}
 		} else {
-			echo "<script>alert('enter user id')</script>";
+			$vote_count = Database::get_all_votes( $feature_id );
+			echo esc_html( $vote_count );
+			wp_send_json_error( array( 'message' => 'Enter the reference field' ) );
+
 		}
 
 			exit();

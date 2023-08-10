@@ -57,8 +57,23 @@ jQuery(document).ready(function($) {
 
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseText);
-                console.log(error)
+                // console.log(xhr)
+                var responseText = xhr.responseText;
+        
+                // Remove the leading "3" from the response text
+                var jsonStartIndex = responseText.indexOf('{');
+                if (jsonStartIndex !== -1) {
+                    responseText = responseText.substring(jsonStartIndex);
+                }
+
+                try {
+                    var responseJSON = JSON.parse(responseText);
+                    var errorMessage = responseJSON.data.message;
+                    alert(errorMessage);
+                } catch (e) {
+                    console.error("Error parsing JSON response:", e);
+                    console.log("Raw response:", responseText);
+                }
             }
 
         })
@@ -139,7 +154,7 @@ jQuery(document).on("click", '#add_more', function(event) {
                 $('#left_side').html(response);
             },
             error: function() {
-                alert('An error occurred while loading the PHP file content.');
+                alert( wp.i18n.__('An error occurred while loading the PHP file content.'));
             }
         });
 
@@ -280,7 +295,7 @@ jQuery(document).on("click", '#add_more', function(event) {
                 $('#left_side').html(response);
             },
             error: function() {
-                alert('An error occurred while loading the PHP file content.');
+                alert( wp.i18n.__('An error occurred while loading the PHP file content.'));
             }
 
        
